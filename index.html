@@ -41,9 +41,92 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        /* Dropdown menu styles */
+        .dropbar {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbar-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+
+        .dropbar:hover .dropbar-content {
+            display: block;
+        }
+
+        .dropbar-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropbar-content a:hover {
+            background-color: #ddd;
+        }
+
+        /* Basic layout styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .navbar {
+            background-color: #ff4500;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .layout {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #fff;
+            padding: 15px;
+            border-right: 1px solid #ddd;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 15px;
+        }
+
+        .post-item {
+            display: flex;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: white;
+        }
+
+        .post-image {
+            margin-right: 10px;
+        }
+
+        .heading {
+            margin: 0;
+            padding-bottom: 10px;
+        }
+
+        .stats {
+            font-size: 12px;
+            color: gray;
+        }
     </style>
 </head>
-
 <body>
     <header class="navbar">
         <div class="nav-title">Reddit Clone</div>
@@ -51,15 +134,26 @@
             <button class="login-button" id="loginBtn">Log In</button>
         </div>
     </header>
+
     <div class="layout">
         <aside class="sidebar">
             <nav>
                 <ul>
                     <li><a href="index.html" class="link">Home</a></li>
-                    <li><a href="subreddit.html" class="link">Subreddit</a></li>
+                    
                     <li><a href="#" class="link">Settings</a></li>
                 </ul>
             </nav>
+            <div class="dropbar">
+                <button>Subreddit</button> <!-- Changed from Categories to Subreddit -->
+                <div class="dropbar-content">
+                    <a href="subreddit1.html">r/askreddit</a>
+                    <a href="#">r/angryupvote</a>
+                    <a href="#">r/curseddocuments</a>
+                    <a href="#">r/damnthatsinteresting</a>
+                    <a href="#">r/goodsoup</a>
+                </div>
+            </div>
         </aside>
 
         <main class="main-content">
@@ -70,14 +164,15 @@
                         <div class="post-item">
                             <img src="https://via.placeholder.com/100" alt="Post 1" class="post-image">
                             <div class="post-info">
-                                <a href="#" class="title">Post 1</a>
-                                <p class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <a href="#" class="author">Author</a>
+                                <a href="#" class="title">The Impact of AI on Modern Education</a>
+                                <p class="content">As artificial intelligence continues to advance, its integration into educational systems is reshaping the way teachers instruct and students learn. From personalized learning experiences to administrative efficiency, AI is creating new opportunities and challenges. What are your thoughts on its role in the classroom?</p>
+                                <a href="#" class="author">u/education_expert</a>
                                 <div class="stats">
-                                    <span class="votes">123 votes</span>
-                                    <span class="comments">123 comments</span>
+                                    <span class="votes">250 votes</span>
+                                    <span class="comments">45 comments</span>
                                 </div>
                             </div>
+                        </div>
                         </div>
                         <div class="post-item">
                             <img src="https://via.placeholder.com/100" alt="Post 2" class="post-image">
@@ -99,7 +194,7 @@
                                 <a href="#" class="author">Author</a>
                                 <div class="stats">
                                     <span class="votes">123 votes</span>
-                                    <span class="comments">123 comments </span>
+                                    <span class="comments">123 comments</span>
                                 </div>
                             </div>
                         </div>
@@ -108,9 +203,6 @@
             </div>
         </main>
     </div>
-    <footer>
-     
-    </footer>
 
     <!-- The Modal -->
     <div id="loginModal" class="modal">

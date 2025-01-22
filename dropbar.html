@@ -18,6 +18,34 @@
             padding: 10px;
             text-align: center;
         }
+        .navbar {
+            text-align: center;
+            margin: 15px 0;
+        }
+        .dropbar {
+            position: relative;
+            display: inline-block;
+        }
+        .dropbar-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropbar:hover .dropbar-content {
+            display: block;
+        }
+        .dropbar-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropbar-content a:hover {
+            background-color: #ddd;
+        }
         .post {
             background: white;
             border: 1px solid #ddd;
@@ -43,6 +71,19 @@
 <div class="subreddit-header">
     <h1>Sample Subreddit</h1>
     <p>Welcome to the Sample Subreddit!</p>
+</div>
+
+<div class="navbar">
+    <div class="dropbar">
+        <button>Categories</button>
+        <div class="dropbar-content">
+            <a href="#">r/askreddit</a>
+            <a href="#">r/angryupvote</a>
+            <a href="#">r/curseddocuments</a>
+            <a href="#">r/damnthatsinteresting</a>
+            <a href="#">r/goodsoup</a>
+        </div>
+    </div>
 </div>
 
 <div class="post">
