@@ -1,251 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reddit Clone</title>
-    <link rel="stylesheet" href="css/index.css">
+    <title>Pinterest Clone</title>
     <style>
-        /* Basic styles for the modal */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* Dropdown menu styles */
-        .dropbar {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropbar-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 2;
-        }
-
-        .dropbar:hover .dropbar-content {
-            display: block;
-        }
-
-        .dropbar-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropbar-content a:hover {
-            background-color: #ddd;
-        }
-
-        /* Basic layout styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f0f2f5; /* Light gray background */
+        }
+
+        header {
+    background-color: #fff;
+    padding: 30px 15px; /* Add top padding here */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 24px;
+            margin-right: 5px;
+        }
+
+        nav ul {
+            list-style: none;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            display: flex;
         }
 
-        .navbar {
-            background-color: #ff4500;
-            color: white;
-            padding: 15px;
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333; /* Dark gray color */
+            font-weight: 500; /* Slightly bolder font */
+        }
+
+    
+nav .right-nav {
+    display: flex;
+    align-items: center;
+    text-align: right; /* Align text to the right */
+    margin-left: auto; 
+    gap: 15px; 
+}
+
+nav .right-nav ul li a {
+    font-weight: bold; /* Make the text bold */
+}
+
+        .hero {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 0;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #333; /* Dark gray text */
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #666; /* Light gray text */
+        }
+
+        .hero-content .dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .hero-content .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin: 0 5px;
+        }
+
+        .hero-content .dot.active {
+            background-color: #333;
+        }
+
+        .image-grid {
+            display: flex;
+            overflow-x: auto;
+            padding: 20px;
+        }
+
+        .image-grid img {
+            width: 200px;
+            height: auto;
+            margin-right: 20px;
+            border-radius: 5px; /* Add border-radius for rounded images */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow on images */
+        }
+
+        .cta-button {
+            background-color: #e50914; /* Pinterest red */
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 30px;
             text-align: center;
         }
 
-        .layout {
-            display: flex;
-        }
-
-        .sidebar {
-            width: 200px;
-            background-color: #fff;
-            padding: 15px;
-            border-right: 1px solid #ddd;
-        }
-
-        .main-content {
-            flex: 1;
-            padding: 15px;
-        }
-
-        .post-item {
-            display: flex;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            padding: 10px;
-            background: white;
-        }
-
-        .post-image {
-            margin-right: 10px;
-        }
-
-        .heading {
-            margin: 0;
-            padding-bottom: 10px;
-        }
-
-        .stats {
-            font-size: 12px;
-            color: gray;
+        /* Optional: Hover effect for buttons */
+        button:hover {
+            background-color: #d30713; /* Slightly darker red on hover */
         }
     </style>
 </head>
 <body>
-    <header class="navbar">
-        <div class="nav-title">Reddit Clone</div>
-        <div class="nav-actions">
-            <button class="login-button" id="loginBtn">Log In</button>
+
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Pinterest Logo"> 
+            <span>Pinterest</span>
         </div>
+        <nav>
+          
+            <div class="right-nav">
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Business</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+                <button>Log in</button>
+                <button>Sign up</button>
+            </div>
+        </nav>
     </header>
 
-    <div class="layout">
-        <aside class="sidebar">
-            <nav>
-                <ul>
-                    <li><a href="index.html" class="link">Home</a></li>
-                    
-                    <li><a href="#" class="link">Settings</a></li>
-                </ul>
-            </nav>
-            <div class="dropbar">
-                <button>Subreddit</button> <!-- Changed from Categories to Subreddit -->
-                <div class="dropbar-content">
-                    <a href="subreddit1.html">r/askreddit</a>
-                    <a href="#">r/angryupvote</a>
-                    <a href="#">r/curseddocuments</a>
-                    <a href="#">r/damnthatsinteresting</a>
-                    <a href="#">r/goodsoup</a>
-                </div>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Get your next <br> green thumb idea</h1>
+            <div class="dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
             </div>
-        </aside>
-
-        <main class="main-content">
-            <div class="container">
-                <div class="trending-posts">
-                    <h2 class="heading">Trending Posts</h2>
-                    <div class="post-list">
-                        <div class="post-item">
-                            <img src="https://via.placeholder.com/100" alt="Post 1" class="post-image">
-                            <div class="post-info">
-                                <a href="#" class="title">The Impact of AI on Modern Education</a>
-                                <p class="content">As artificial intelligence continues to advance, its integration into educational systems is reshaping the way teachers instruct and students learn. From personalized learning experiences to administrative efficiency, AI is creating new opportunities and challenges. What are your thoughts on its role in the classroom?</p>
-                                <a href="#" class="author">u/education_expert</a>
-                                <div class="stats">
-                                    <span class="votes">250 votes</span>
-                                    <span class="comments">45 comments</span>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="post-item">
-                            <img src="https://via.placeholder.com/100" alt="Post 2" class="post-image">
-                            <div class="post-info">
-                                <a href="#" class="title">Post 2</a>
-                                <p class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <a href="#" class="author">Author</a>
-                                <div class="stats">
-                                    <span class="votes">123 votes</span>
-                                    <span class="comments">123 comments</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-item">
-                            <img src="https://via.placeholder.com/100" alt="Post 3" class="post-image">
-                            <div class="post-info">
-                                <a href="#" class="title">Post 3</a>
-                                <p class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <a href="#" class="author">Author</a>
-                                <div class="stats">
-                                    <span class="votes">123 votes</span>
-                                    <span class="comments">123 comments</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- The Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Login</h2>
-            <form>
-                <label for="username">Username:</label><br>
-                <input type="text" id="username" name="username" required><br><br>
-                <label for="password">Password:</label><br>
-                <input type="password" id="password" name="password" required><br><br>
-                <button type="submit">Submit</button>
-            </form>
         </div>
     </div>
 
-    <script>
-        // Get the modal
-        var modal = document.getElementById("loginModal");
+    <div class="image-grid">
+        <img src="image1.jpg" alt="Image 1">
+        <img src="image2.jpg" alt="Image 2">
+        <img src="image3.jpg" alt="Image 3">
+        <img src="image4.jpg" alt="Image 4">
+        <img src="image5.jpg" alt="Image 5">
+        <img src="image6.jpg" alt="Image 6">
+    </div>
 
-        // Get the button that opens the modal
-        var btn = document.getElementById("loginBtn");
+    <div class="cta">
+        <a href="#" class="cta-button">Here's how it works &rarr;</a>
+    </div>
 
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the modal 
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
 </body>
-
 </html>
